@@ -13,18 +13,7 @@ struct ContentView: View {
     
     var body: some View {
         VStack (spacing: 30) {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Gaday, Pinochlers")
-            
-            Button("Show Model") {
-                isPresented = true
-            }
-            .sheet(isPresented: $isPresented) {
-                Text("Model Screen")
-            }
-            
+            Text("Learning Git")
         }
         .padding()
     }
