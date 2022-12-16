@@ -9,9 +9,26 @@ import SwiftUI
 
 @main
 struct PinochleApp: App {
+    
+    @StateObject var manager = PinochleManager()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            if ScorerSingleton.shared.isIPhone == true {
+                HomeViewPhone()
+                    .environmentObject(manager)
+                    .onAppear{
+                        // Stop layout conflict messages
+                        UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
+                    }
+            } else {
+                HomeView()
+                    .environmentObject(manager)
+                    .onAppear{
+                        // Stop layout conflict messages
+                        UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
+                    }
+            }
         }
     }
 }

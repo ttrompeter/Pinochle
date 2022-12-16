@@ -7,6 +7,54 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E371D4BB294CD64F00BA307C /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = E371D4BA294CD64F00BA307C /* Realm */; };
+		E371D4BD294CD64F00BA307C /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E371D4BC294CD64F00BA307C /* RealmSwift */; };
+		E371D4BF294CD78000BA307C /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371D4BE294CD78000BA307C /* Game.swift */; };
+		E371D4C1294CD78A00BA307C /* Hand.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371D4C0294CD78A00BA307C /* Hand.swift */; };
+		E371D4C3294CD79B00BA307C /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371D4C2294CD79B00BA307C /* Match.swift */; };
+		E371D4C9294CD7AA00BA307C /* PlayerWithScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371D4C4294CD7AA00BA307C /* PlayerWithScore.swift */; };
+		E371D4CA294CD7AA00BA307C /* ScorerSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371D4C5294CD7AA00BA307C /* ScorerSingleton.swift */; };
+		E371D4CB294CD7AA00BA307C /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371D4C6294CD7AA00BA307C /* Player.swift */; };
+		E371D4CC294CD7AA00BA307C /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371D4C7294CD7AA00BA307C /* Settings.swift */; };
+		E371D4CD294CD7AA00BA307C /* PinochleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371D4C8294CD7AA00BA307C /* PinochleManager.swift */; };
+		E371D4CF294CD7D600BA307C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371D4CE294CD7D600BA307C /* Constants.swift */; };
+		E371D4D6294CD7EA00BA307C /* TypeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371D4D0294CD7EA00BA307C /* TypeExtension.swift */; };
+		E371D4D7294CD7EA00BA307C /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371D4D1294CD7EA00BA307C /* Styles.swift */; };
+		E371D4D8294CD7EA00BA307C /* PDFKitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371D4D2294CD7EA00BA307C /* PDFKitView.swift */; };
+		E371D4D9294CD7EA00BA307C /* UsingPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371D4D3294CD7EA00BA307C /* UsingPopover.swift */; };
+		E371D4DA294CD7EA00BA307C /* SheetModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371D4D4294CD7EA00BA307C /* SheetModifiers.swift */; };
+		E371D4DB294CD7EA00BA307C /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371D4D5294CD7EA00BA307C /* Validator.swift */; };
+		E371D4DD294CD81500BA307C /* pinochleUserManual.pdf in Resources */ = {isa = PBXBuildFile; fileRef = E371D4DC294CD81500BA307C /* pinochleUserManual.pdf */; };
+		E371D4E4294CD89D00BA307C /* ScratchPadSheetPhone.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371D4DE294CD89D00BA307C /* ScratchPadSheetPhone.swift */; };
+		E371D4E5294CD89D00BA307C /* TextEntryFieldPhone.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371D4DF294CD89D00BA307C /* TextEntryFieldPhone.swift */; };
+		E371D4E6294CD89D00BA307C /* MainTabViewPhone.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371D4E0294CD89D00BA307C /* MainTabViewPhone.swift */; };
+		E371D4E7294CD89D00BA307C /* MatchSetupSheetPhone.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371D4E1294CD89D00BA307C /* MatchSetupSheetPhone.swift */; };
+		E371D4E8294CD89D00BA307C /* HomeViewPhone.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371D4E2294CD89D00BA307C /* HomeViewPhone.swift */; };
+		E371D4E9294CD89D00BA307C /* HandViewPhone.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371D4E3294CD89D00BA307C /* HandViewPhone.swift */; };
+		E371D4ED294CD8D400BA307C /* ConcedeGamePopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371D4EA294CD8D400BA307C /* ConcedeGamePopover.swift */; };
+		E371D4EE294CD8D400BA307C /* BidderWasSetPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371D4EB294CD8D400BA307C /* BidderWasSetPopover.swift */; };
+		E371D4EF294CD8D400BA307C /* AdminTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371D4EC294CD8D400BA307C /* AdminTabView.swift */; };
+		E371D505294CD8EC00BA307C /* MisdealPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371D4F0294CD8EB00BA307C /* MisdealPopover.swift */; };
+		E371D506294CD8EC00BA307C /* MatchSetupSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371D4F1294CD8EB00BA307C /* MatchSetupSheet.swift */; };
+		E371D507294CD8EC00BA307C /* GameOverPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371D4F2294CD8EB00BA307C /* GameOverPopover.swift */; };
+		E371D508294CD8EC00BA307C /* PlayerPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371D4F3294CD8EB00BA307C /* PlayerPickerView.swift */; };
+		E371D509294CD8EC00BA307C /* MeldCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371D4F4294CD8EB00BA307C /* MeldCardView.swift */; };
+		E371D50A294CD8EC00BA307C /* InvalidWinningBidPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371D4F5294CD8EB00BA307C /* InvalidWinningBidPopover.swift */; };
+		E371D50B294CD8EC00BA307C /* ProgrammerNotes.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371D4F6294CD8EB00BA307C /* ProgrammerNotes.swift */; };
+		E371D50C294CD8EC00BA307C /* RenegePopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371D4F7294CD8EB00BA307C /* RenegePopover.swift */; };
+		E371D50D294CD8EC00BA307C /* ScratchPadSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371D4F8294CD8EB00BA307C /* ScratchPadSheet.swift */; };
+		E371D50E294CD8EC00BA307C /* SettingsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371D4F9294CD8EB00BA307C /* SettingsTabView.swift */; };
+		E371D50F294CD8EC00BA307C /* EndMatchPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371D4FA294CD8EB00BA307C /* EndMatchPopover.swift */; };
+		E371D510294CD8EC00BA307C /* HandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371D4FB294CD8EB00BA307C /* HandView.swift */; };
+		E371D511294CD8EC00BA307C /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371D4FC294CD8EC00BA307C /* MainTabView.swift */; };
+		E371D512294CD8EC00BA307C /* SettingsScoringView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371D4FD294CD8EC00BA307C /* SettingsScoringView.swift */; };
+		E371D513294CD8EC00BA307C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371D4FE294CD8EC00BA307C /* HomeView.swift */; };
+		E371D514294CD8EC00BA307C /* InvalidMeldPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371D4FF294CD8EC00BA307C /* InvalidMeldPopover.swift */; };
+		E371D515294CD8EC00BA307C /* MatchOverPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371D500294CD8EC00BA307C /* MatchOverPopover.swift */; };
+		E371D516294CD8EC00BA307C /* TextEntryField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371D501294CD8EC00BA307C /* TextEntryField.swift */; };
+		E371D517294CD8EC00BA307C /* UserManualView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371D502294CD8EC00BA307C /* UserManualView.swift */; };
+		E371D518294CD8EC00BA307C /* SettingsPlayersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371D503294CD8EC00BA307C /* SettingsPlayersView.swift */; };
+		E371D519294CD8EC00BA307C /* InvalidTrickPointsPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371D504294CD8EC00BA307C /* InvalidTrickPointsPopover.swift */; };
 		E3D9AE30294CC6E10025F4A5 /* PinochleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D9AE2F294CC6E10025F4A5 /* PinochleApp.swift */; };
 		E3D9AE32294CC6E10025F4A5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D9AE31294CC6E10025F4A5 /* ContentView.swift */; };
 		E3D9AE34294CC6E20025F4A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3D9AE33294CC6E20025F4A5 /* Assets.xcassets */; };
@@ -14,6 +62,52 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E371D4BE294CD78000BA307C /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		E371D4C0294CD78A00BA307C /* Hand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hand.swift; sourceTree = "<group>"; };
+		E371D4C2294CD79B00BA307C /* Match.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
+		E371D4C4294CD7AA00BA307C /* PlayerWithScore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerWithScore.swift; sourceTree = "<group>"; };
+		E371D4C5294CD7AA00BA307C /* ScorerSingleton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScorerSingleton.swift; sourceTree = "<group>"; };
+		E371D4C6294CD7AA00BA307C /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		E371D4C7294CD7AA00BA307C /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		E371D4C8294CD7AA00BA307C /* PinochleManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinochleManager.swift; sourceTree = "<group>"; };
+		E371D4CE294CD7D600BA307C /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		E371D4D0294CD7EA00BA307C /* TypeExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeExtension.swift; sourceTree = "<group>"; };
+		E371D4D1294CD7EA00BA307C /* Styles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
+		E371D4D2294CD7EA00BA307C /* PDFKitView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFKitView.swift; sourceTree = "<group>"; };
+		E371D4D3294CD7EA00BA307C /* UsingPopover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsingPopover.swift; sourceTree = "<group>"; };
+		E371D4D4294CD7EA00BA307C /* SheetModifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheetModifiers.swift; sourceTree = "<group>"; };
+		E371D4D5294CD7EA00BA307C /* Validator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
+		E371D4DC294CD81500BA307C /* pinochleUserManual.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = pinochleUserManual.pdf; sourceTree = "<group>"; };
+		E371D4DE294CD89D00BA307C /* ScratchPadSheetPhone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScratchPadSheetPhone.swift; sourceTree = "<group>"; };
+		E371D4DF294CD89D00BA307C /* TextEntryFieldPhone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextEntryFieldPhone.swift; sourceTree = "<group>"; };
+		E371D4E0294CD89D00BA307C /* MainTabViewPhone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabViewPhone.swift; sourceTree = "<group>"; };
+		E371D4E1294CD89D00BA307C /* MatchSetupSheetPhone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchSetupSheetPhone.swift; sourceTree = "<group>"; };
+		E371D4E2294CD89D00BA307C /* HomeViewPhone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewPhone.swift; sourceTree = "<group>"; };
+		E371D4E3294CD89D00BA307C /* HandViewPhone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HandViewPhone.swift; sourceTree = "<group>"; };
+		E371D4EA294CD8D400BA307C /* ConcedeGamePopover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConcedeGamePopover.swift; sourceTree = "<group>"; };
+		E371D4EB294CD8D400BA307C /* BidderWasSetPopover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BidderWasSetPopover.swift; sourceTree = "<group>"; };
+		E371D4EC294CD8D400BA307C /* AdminTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminTabView.swift; sourceTree = "<group>"; };
+		E371D4F0294CD8EB00BA307C /* MisdealPopover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MisdealPopover.swift; sourceTree = "<group>"; };
+		E371D4F1294CD8EB00BA307C /* MatchSetupSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchSetupSheet.swift; sourceTree = "<group>"; };
+		E371D4F2294CD8EB00BA307C /* GameOverPopover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverPopover.swift; sourceTree = "<group>"; };
+		E371D4F3294CD8EB00BA307C /* PlayerPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerPickerView.swift; sourceTree = "<group>"; };
+		E371D4F4294CD8EB00BA307C /* MeldCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeldCardView.swift; sourceTree = "<group>"; };
+		E371D4F5294CD8EB00BA307C /* InvalidWinningBidPopover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvalidWinningBidPopover.swift; sourceTree = "<group>"; };
+		E371D4F6294CD8EB00BA307C /* ProgrammerNotes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgrammerNotes.swift; sourceTree = "<group>"; };
+		E371D4F7294CD8EB00BA307C /* RenegePopover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RenegePopover.swift; sourceTree = "<group>"; };
+		E371D4F8294CD8EB00BA307C /* ScratchPadSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScratchPadSheet.swift; sourceTree = "<group>"; };
+		E371D4F9294CD8EB00BA307C /* SettingsTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTabView.swift; sourceTree = "<group>"; };
+		E371D4FA294CD8EB00BA307C /* EndMatchPopover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndMatchPopover.swift; sourceTree = "<group>"; };
+		E371D4FB294CD8EB00BA307C /* HandView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HandView.swift; sourceTree = "<group>"; };
+		E371D4FC294CD8EC00BA307C /* MainTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		E371D4FD294CD8EC00BA307C /* SettingsScoringView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsScoringView.swift; sourceTree = "<group>"; };
+		E371D4FE294CD8EC00BA307C /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		E371D4FF294CD8EC00BA307C /* InvalidMeldPopover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvalidMeldPopover.swift; sourceTree = "<group>"; };
+		E371D500294CD8EC00BA307C /* MatchOverPopover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchOverPopover.swift; sourceTree = "<group>"; };
+		E371D501294CD8EC00BA307C /* TextEntryField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextEntryField.swift; sourceTree = "<group>"; };
+		E371D502294CD8EC00BA307C /* UserManualView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserManualView.swift; sourceTree = "<group>"; };
+		E371D503294CD8EC00BA307C /* SettingsPlayersView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsPlayersView.swift; sourceTree = "<group>"; };
+		E371D504294CD8EC00BA307C /* InvalidTrickPointsPopover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvalidTrickPointsPopover.swift; sourceTree = "<group>"; };
 		E3D9AE2C294CC6E10025F4A5 /* Pinochle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pinochle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3D9AE2F294CC6E10025F4A5 /* PinochleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinochleApp.swift; sourceTree = "<group>"; };
 		E3D9AE31294CC6E10025F4A5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -26,12 +120,104 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E371D4BD294CD64F00BA307C /* RealmSwift in Frameworks */,
+				E371D4BB294CD64F00BA307C /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E371D4B3294CD23200BA307C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E371D4BE294CD78000BA307C /* Game.swift */,
+				E371D4C0294CD78A00BA307C /* Hand.swift */,
+				E371D4C2294CD79B00BA307C /* Match.swift */,
+				E371D4C8294CD7AA00BA307C /* PinochleManager.swift */,
+				E371D4C6294CD7AA00BA307C /* Player.swift */,
+				E371D4C4294CD7AA00BA307C /* PlayerWithScore.swift */,
+				E371D4C5294CD7AA00BA307C /* ScorerSingleton.swift */,
+				E371D4C7294CD7AA00BA307C /* Settings.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E371D4B4294CD23E00BA307C /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				E371D4CE294CD7D600BA307C /* Constants.swift */,
+				E371D4D2294CD7EA00BA307C /* PDFKitView.swift */,
+				E371D4D4294CD7EA00BA307C /* SheetModifiers.swift */,
+				E371D4D1294CD7EA00BA307C /* Styles.swift */,
+				E371D4D0294CD7EA00BA307C /* TypeExtension.swift */,
+				E371D4D3294CD7EA00BA307C /* UsingPopover.swift */,
+				E371D4D5294CD7EA00BA307C /* Validator.swift */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		E371D4B5294CD24800BA307C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E371D4EC294CD8D400BA307C /* AdminTabView.swift */,
+				E371D4EB294CD8D400BA307C /* BidderWasSetPopover.swift */,
+				E371D4EA294CD8D400BA307C /* ConcedeGamePopover.swift */,
+				E371D4FA294CD8EB00BA307C /* EndMatchPopover.swift */,
+				E371D4F2294CD8EB00BA307C /* GameOverPopover.swift */,
+				E371D4FB294CD8EB00BA307C /* HandView.swift */,
+				E371D4FE294CD8EC00BA307C /* HomeView.swift */,
+				E371D4FF294CD8EC00BA307C /* InvalidMeldPopover.swift */,
+				E371D504294CD8EC00BA307C /* InvalidTrickPointsPopover.swift */,
+				E371D4F5294CD8EB00BA307C /* InvalidWinningBidPopover.swift */,
+				E371D4FC294CD8EC00BA307C /* MainTabView.swift */,
+				E371D500294CD8EC00BA307C /* MatchOverPopover.swift */,
+				E371D4F1294CD8EB00BA307C /* MatchSetupSheet.swift */,
+				E371D4F4294CD8EB00BA307C /* MeldCardView.swift */,
+				E371D4F0294CD8EB00BA307C /* MisdealPopover.swift */,
+				E371D4F3294CD8EB00BA307C /* PlayerPickerView.swift */,
+				E371D4F6294CD8EB00BA307C /* ProgrammerNotes.swift */,
+				E371D4F7294CD8EB00BA307C /* RenegePopover.swift */,
+				E371D4F8294CD8EB00BA307C /* ScratchPadSheet.swift */,
+				E371D503294CD8EC00BA307C /* SettingsPlayersView.swift */,
+				E371D4FD294CD8EC00BA307C /* SettingsScoringView.swift */,
+				E371D4F9294CD8EB00BA307C /* SettingsTabView.swift */,
+				E371D501294CD8EC00BA307C /* TextEntryField.swift */,
+				E371D502294CD8EC00BA307C /* UserManualView.swift */,
+				E3D9AE31294CC6E10025F4A5 /* ContentView.swift */,
+				E371D4B8294CD2D900BA307C /* Pad */,
+				E371D4B7294CD2CE00BA307C /* Phone */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E371D4B6294CD25B00BA307C /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		E371D4B7294CD2CE00BA307C /* Phone */ = {
+			isa = PBXGroup;
+			children = (
+				E371D4E3294CD89D00BA307C /* HandViewPhone.swift */,
+				E371D4E2294CD89D00BA307C /* HomeViewPhone.swift */,
+				E371D4E0294CD89D00BA307C /* MainTabViewPhone.swift */,
+				E371D4E1294CD89D00BA307C /* MatchSetupSheetPhone.swift */,
+				E371D4DE294CD89D00BA307C /* ScratchPadSheetPhone.swift */,
+				E371D4DF294CD89D00BA307C /* TextEntryFieldPhone.swift */,
+			);
+			path = Phone;
+			sourceTree = "<group>";
+		};
+		E371D4B8294CD2D900BA307C /* Pad */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Pad;
+			sourceTree = "<group>";
+		};
 		E3D9AE23294CC6E10025F4A5 = {
 			isa = PBXGroup;
 			children = (
@@ -52,8 +238,12 @@
 			isa = PBXGroup;
 			children = (
 				E3D9AE2F294CC6E10025F4A5 /* PinochleApp.swift */,
-				E3D9AE31294CC6E10025F4A5 /* ContentView.swift */,
+				E371D4B3294CD23200BA307C /* Model */,
+				E371D4B4294CD23E00BA307C /* Support */,
+				E371D4B5294CD24800BA307C /* View */,
+				E371D4B6294CD25B00BA307C /* ViewModel */,
 				E3D9AE33294CC6E20025F4A5 /* Assets.xcassets */,
+				E371D4DC294CD81500BA307C /* pinochleUserManual.pdf */,
 				E3D9AE35294CC6E20025F4A5 /* Preview Content */,
 			);
 			path = Pinochle;
@@ -83,6 +273,10 @@
 			dependencies = (
 			);
 			name = Pinochle;
+			packageProductDependencies = (
+				E371D4BA294CD64F00BA307C /* Realm */,
+				E371D4BC294CD64F00BA307C /* RealmSwift */,
+			);
 			productName = Pinochle;
 			productReference = E3D9AE2C294CC6E10025F4A5 /* Pinochle.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +305,9 @@
 				Base,
 			);
 			mainGroup = E3D9AE23294CC6E10025F4A5;
+			packageReferences = (
+				E371D4B9294CD64F00BA307C /* XCRemoteSwiftPackageReference "realm-swift" */,
+			);
 			productRefGroup = E3D9AE2D294CC6E10025F4A5 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -127,6 +324,7 @@
 			files = (
 				E3D9AE37294CC6E20025F4A5 /* Preview Assets.xcassets in Resources */,
 				E3D9AE34294CC6E20025F4A5 /* Assets.xcassets in Resources */,
+				E371D4DD294CD81500BA307C /* pinochleUserManual.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,8 +335,53 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E371D4C1294CD78A00BA307C /* Hand.swift in Sources */,
+				E371D4D6294CD7EA00BA307C /* TypeExtension.swift in Sources */,
+				E371D518294CD8EC00BA307C /* SettingsPlayersView.swift in Sources */,
+				E371D4E6294CD89D00BA307C /* MainTabViewPhone.swift in Sources */,
+				E371D4D7294CD7EA00BA307C /* Styles.swift in Sources */,
+				E371D4E9294CD89D00BA307C /* HandViewPhone.swift in Sources */,
+				E371D508294CD8EC00BA307C /* PlayerPickerView.swift in Sources */,
+				E371D4CF294CD7D600BA307C /* Constants.swift in Sources */,
+				E371D4D9294CD7EA00BA307C /* UsingPopover.swift in Sources */,
+				E371D4E7294CD89D00BA307C /* MatchSetupSheetPhone.swift in Sources */,
+				E371D510294CD8EC00BA307C /* HandView.swift in Sources */,
 				E3D9AE32294CC6E10025F4A5 /* ContentView.swift in Sources */,
+				E371D4E8294CD89D00BA307C /* HomeViewPhone.swift in Sources */,
+				E371D513294CD8EC00BA307C /* HomeView.swift in Sources */,
+				E371D4EF294CD8D400BA307C /* AdminTabView.swift in Sources */,
+				E371D50F294CD8EC00BA307C /* EndMatchPopover.swift in Sources */,
+				E371D4CA294CD7AA00BA307C /* ScorerSingleton.swift in Sources */,
+				E371D517294CD8EC00BA307C /* UserManualView.swift in Sources */,
+				E371D50C294CD8EC00BA307C /* RenegePopover.swift in Sources */,
+				E371D505294CD8EC00BA307C /* MisdealPopover.swift in Sources */,
+				E371D516294CD8EC00BA307C /* TextEntryField.swift in Sources */,
+				E371D4BF294CD78000BA307C /* Game.swift in Sources */,
+				E371D4CB294CD7AA00BA307C /* Player.swift in Sources */,
+				E371D4E4294CD89D00BA307C /* ScratchPadSheetPhone.swift in Sources */,
+				E371D511294CD8EC00BA307C /* MainTabView.swift in Sources */,
+				E371D4CD294CD7AA00BA307C /* PinochleManager.swift in Sources */,
+				E371D4DA294CD7EA00BA307C /* SheetModifiers.swift in Sources */,
+				E371D515294CD8EC00BA307C /* MatchOverPopover.swift in Sources */,
+				E371D4E5294CD89D00BA307C /* TextEntryFieldPhone.swift in Sources */,
+				E371D50A294CD8EC00BA307C /* InvalidWinningBidPopover.swift in Sources */,
+				E371D506294CD8EC00BA307C /* MatchSetupSheet.swift in Sources */,
+				E371D514294CD8EC00BA307C /* InvalidMeldPopover.swift in Sources */,
+				E371D4ED294CD8D400BA307C /* ConcedeGamePopover.swift in Sources */,
+				E371D50B294CD8EC00BA307C /* ProgrammerNotes.swift in Sources */,
+				E371D4C3294CD79B00BA307C /* Match.swift in Sources */,
+				E371D4EE294CD8D400BA307C /* BidderWasSetPopover.swift in Sources */,
+				E371D50D294CD8EC00BA307C /* ScratchPadSheet.swift in Sources */,
+				E371D519294CD8EC00BA307C /* InvalidTrickPointsPopover.swift in Sources */,
+				E371D4DB294CD7EA00BA307C /* Validator.swift in Sources */,
+				E371D4CC294CD7AA00BA307C /* Settings.swift in Sources */,
 				E3D9AE30294CC6E10025F4A5 /* PinochleApp.swift in Sources */,
+				E371D507294CD8EC00BA307C /* GameOverPopover.swift in Sources */,
+				E371D4D8294CD7EA00BA307C /* PDFKitView.swift in Sources */,
+				E371D4C9294CD7AA00BA307C /* PlayerWithScore.swift in Sources */,
+				E371D512294CD8EC00BA307C /* SettingsScoringView.swift in Sources */,
+				E371D509294CD8EC00BA307C /* MeldCardView.swift in Sources */,
+				E371D50E294CD8EC00BA307C /* SettingsTabView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,6 +582,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E371D4B9294CD64F00BA307C /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.33.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E371D4BA294CD64F00BA307C /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E371D4B9294CD64F00BA307C /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		E371D4BC294CD64F00BA307C /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E371D4B9294CD64F00BA307C /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E3D9AE24294CC6E10025F4A5 /* Project object */;
 }
