@@ -77,7 +77,8 @@ struct HomeViewPhone: View {
                 Spacer()
             }
             .navigationDestination(for: Bool.self) { aValue in
-                MainTabViewPhone()
+                MainTabView()
+                //MainTabViewPhone()
             }
         }
         .foregroundColor(Color(.racinggreen))

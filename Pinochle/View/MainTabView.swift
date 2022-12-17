@@ -16,10 +16,17 @@ struct MainTabView: View {
         
         VStack (spacing: 30) {
             TabView {
-                HandView(match: manager.match)
-                    .tabItem {
-                        Label("Hand", systemImage: "suit.spade")
-                    }
+                if ScorerSingleton.shared.isIPhone == true {
+                    HandViewPhone(match: manager.match)
+                        .tabItem {
+                            Label("Hand", systemImage: "suit.spade")
+                        }
+                } else {
+                    HandView(match: manager.match)
+                        .tabItem {
+                            Label("Hand", systemImage: "suit.spade")
+                        }
+                }
                 MeldCardView()
                     .tabItem {
                         Label("Meld Card", systemImage: "doc.plaintext")

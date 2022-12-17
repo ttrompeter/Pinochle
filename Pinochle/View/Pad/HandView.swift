@@ -30,6 +30,10 @@ struct HandView: View {
     @State var showingScratchPadSheet = false
     @State var showingUnlockedButton = false
     
+    // Testing Custom KeyPad
+    @State var winningBidAmountText: String = " "
+    @State var isKeyPadVisibleWinningBid: Bool = false
+    @State var isKeyPadVisiblePlayer1Meld: Bool = false
   
     var body: some View {
         
@@ -214,7 +218,7 @@ struct HandView: View {
                             HStack {
                                 Text("Bid Winner: ")
                                 // TODO: - selected bid winner should be in Hand and not in Match
-                                // $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].selectedBidWinnerName
+    // $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].selectedBidWinnerName
                                 Picker(selection: $manager.match.selectedHandBidWinnerName,
                                        label: Text("Bid Winner"),
                                        content:  {
@@ -234,13 +238,30 @@ struct HandView: View {
                                 HStack {
                                     Text("Winning Bid: ")
                                     
-                                    TextEntryField(placeholder: "Bid", prompt: "Number", field: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].winningBidText)
-                                        .disabled(manager.match.isDisabledWinningBidTextField)
+                                    Text(manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].winningBidText)
+                                        .frame(width:60, height: 30)
+                                        .foregroundColor(Color(.racinggreen))
+                                        .font(.system(size: 24))
+                                        .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color(.tan), lineWidth: 0.5))
+                                        .popover(isPresented: $isKeyPadVisibleWinningBid, attachmentAnchor: .point(.trailing), arrowEdge: .leading) {
+                                            ZStack {
+                                                Color.gray.scaleEffect(1.5).opacity(0.2)
+                                                CustomKeyPad(string: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].winningBidText, show: $isKeyPadVisibleWinningBid, updateCallback: { isKeyPadVisibleWinningBid = false }, updateMessage: { print("\(winningBidAmountText)")}
+                                                )
+                                                .frame(width: 361.0, height: 332.0)
+                                                .interactiveDismissDisabled(true)
+                                            }
+                                        }
+                                        .onTapGesture {
+                                            isKeyPadVisibleWinningBid.toggle()
+                                        }
                                     
-//                                    TextField("Bid", text: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].winningBidText)
-//                                        .frame(width:50)
-//                                        .keyboardType(.decimalPad)
-//                                        .disabled(manager.match.isDisabledWinningBidTextField || !manager.match.isMatchSetupCompleted)
+                                    
+                                    
+                                    
+//                                    TextEntryField(placeholder: "Bid", prompt: "Number", field: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].winningBidText)
+//                                        .disabled(manager.match.isDisabledWinningBidTextField)
+                                    
                                 }
                                 .popover(isPresented: $showingInvalidWinningBidPopover) {
                                     VStack (spacing: 10) {
@@ -357,6 +378,7 @@ struct HandView: View {
                                             Text("\(manager.match.player1Name):")
                                                 .frame(height: 25)
                                                 .lineLimit(1)
+
                                             TextEntryField(placeholder: "Meld", prompt: "Number", field: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player1MeldText)
                                                 .disabled(manager.match.isDisabledPlayer1MeldTextField)
                                         }
@@ -408,9 +430,51 @@ struct HandView: View {
                                             }
                                             Text("     ")
                                             VStack (alignment: .trailing) {
+        // manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].winningBidText
+        // manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player1MeldText
                                                 
-                                                TextEntryField(placeholder: "Meld", prompt: "Number", field: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player1MeldText)
-                                                    .disabled(manager.match.isDisabledPlayer1MeldTextField)
+                                                Text(winningBidAmountText)
+                                                    .frame(width:60, height: 30)
+                                                    .foregroundColor(Color(.racinggreen))
+                                                    .font(.system(size: 24))
+                                                    .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color(.tan), lineWidth: 0.5))
+                                                    .popover(isPresented: $isKeyPadVisiblePlayer1Meld, attachmentAnchor: .point(.trailing), arrowEdge: .leading) {
+                                                        ZStack {
+                                                            Color.gray.scaleEffect(1.5).opacity(0.2)
+                                                            CustomKeyPad(string: $winningBidAmountText, show: $isKeyPadVisiblePlayer1Meld, updateCallback: { isKeyPadVisiblePlayer1Meld = false }, updateMessage: { print("updateMessage: \(winningBidAmountText)")}
+                                                            )
+                                                            .frame(width: 361.0, height: 332.0)
+                                                            .interactiveDismissDisabled(true)
+                                                        }
+                                                    }
+                                                    .onTapGesture {
+                                                        isKeyPadVisiblePlayer1Meld.toggle()
+                                                    }
+                                                
+                                                
+                                                
+                                                
+                                                
+//                                                Text(manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player1MeldText)
+//                                                    .frame(width:60, height: 30)
+//                                                    .foregroundColor(Color(.racinggreen))
+//                                                    .font(.system(size: 24))
+//                                                    .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color(.tan), lineWidth: 0.5))
+//                                                    .popover(isPresented: $isKeyPadVisiblePlayer1Meld, attachmentAnchor: .point(.trailing), arrowEdge: .leading) {
+//                                                        ZStack {
+//                                                            Color.gray.scaleEffect(1.5).opacity(0.2)
+//                                                            CustomKeyPad(string: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player1MeldText, show: $isKeyPadVisiblePlayer1Meld, updateCallback: { isKeyPadVisiblePlayer1Meld = false }, updateMessage: { print("\(winningBidAmountText)")}
+//                                                            )
+//                                                            .frame(width: KeyPadConstants.KEYPAD_WIDTH, height: KeyPadConstants.KEYPAD_HEIGHT_WITH_DONE_BUTTON)
+//                                                            .interactiveDismissDisabled(true)
+//                                                        }
+//                                                    }
+//                                                    .onTapGesture {
+//                                                        isKeyPadVisiblePlayer1Meld.toggle()
+//                                                    }
+                                                
+//                                                TextEntryField(placeholder: "Meld", prompt: "Number", field: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player1MeldText)
+//                                                    .disabled(manager.match.isDisabledPlayer1MeldTextField)
                                                 
                                                 TextEntryField(placeholder: "Meld", prompt: "Number", field: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player3MeldText)
                                                     .disabled(manager.match.isDisabledPlayer3MeldTextField)
@@ -555,10 +619,7 @@ struct HandView: View {
                             }
                             .buttonStyle(SmallButtonStyle())
                             .disabled(manager.match.isDisabledEditMeldBtn || !manager.match.isMatchSetupCompleted)
-//                            .sheet(isPresented: $showingEditHandPlay) {
-//                                EditHandPlaySheet()
-//                                    .withDismissButton()
-//                            }
+
                             // MARK: - Save Meld Button
                             Button("Save Meld") {
                                 if manager.validateWinningBidEntry(winningBidEntry: manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].winningBidText) {
@@ -719,10 +780,7 @@ struct HandView: View {
                             }
                             .buttonStyle(SmallButtonStyle())
                             .disabled(manager.match.isDisabledEditTrickPointsBtn || !manager.match.isMatchSetupCompleted)
-//                            .sheet(isPresented: $showingEditHandPlay) {
-//                                EditHandPlaySheet()
-//                                    .withDismissButton()
-//                            }
+
                             // MARK: - Save Tricks Button
                             Button("Save Tricks") {
                                 if manager.isTrickPointsSaved {

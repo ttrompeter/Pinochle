@@ -16,22 +16,22 @@ struct MainTabViewPhone: View {
         
         VStack (spacing: 30) {
             TabView {
-                HandViewPhone(match: manager.match)
-                    .tabItem {
-                        Label("Hand", systemImage: "suit.spade")
-                    }
-                MeldCardView()
-                    .tabItem {
-                        Label("Meld Card", systemImage: "doc.plaintext")
-                    }
-                UserManualView()
-                    .tabItem {
-                        Label("Manual", systemImage: "character.book.closed")
-                    }
-                AdminTabView()
-                    .tabItem {
-                        Label("Admin", systemImage: "pencil.and.outline")
-                    }
+//                HandViewPhone(match: manager.match)
+//                    .tabItem {
+//                        Label("Hand", systemImage: "suit.spade")
+//                    }
+//                MeldCardView()
+//                    .tabItem {
+//                        Label("Meld Card", systemImage: "doc.plaintext")
+//                    }
+//                UserManualView()
+//                    .tabItem {
+//                        Label("Manual", systemImage: "character.book.closed")
+//                    }
+//                AdminTabView()
+//                    .tabItem {
+//                        Label("Admin", systemImage: "pencil.and.outline")
+//                    }
             }
         }  // End Top VStack
     }
