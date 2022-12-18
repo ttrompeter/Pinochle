@@ -23,10 +23,12 @@ struct TextEntryField: View {
                     .opacity(isEnabled ? 1.0 : 0.6)
                     .frame(width:60, height: 30)
                     .keyboardType(.numberPad)
+                    .numbersOnly($field)
             }
             .padding(1)
             .background(Color(.clouds))
             .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color(.tan), lineWidth: 0.5))
+            
         }
     }
 }

@@ -20,15 +20,16 @@ struct CustomKeyPad: View {
         ZStack {
             Rectangle()
                 .foregroundColor(Color(.clouds))
+                .frame(width: 270.0, height: 250.0)
                 .cornerRadius(10)
                 .shadow(radius: 5)
             
-            VStack (spacing: 9) {
-                VStack (spacing: 7) {
-                    HStack (spacing: 5) {
-                        KeyPadButton(key: "7")
-                        KeyPadButton(key: "8")
-                        KeyPadButton(key: "9")
+            VStack {
+                VStack (spacing: 5) {
+                    HStack {
+                        KeyPadButton(key: "1")
+                        KeyPadButton(key: "2")
+                        KeyPadButton(key: "3")
                     }
                     HStack {
                         KeyPadButton(key: "4")
@@ -36,9 +37,9 @@ struct CustomKeyPad: View {
                         KeyPadButton(key: "6")
                     }
                     HStack {
-                        KeyPadButton(key: "1")
-                        KeyPadButton(key: "2")
-                        KeyPadButton(key: "3")
+                        KeyPadButton(key: "7")
+                        KeyPadButton(key: "8")
+                        KeyPadButton(key: "9")
                     }
                     HStack {
                         KeyPadButton(key: "Clr")
@@ -51,15 +52,20 @@ struct CustomKeyPad: View {
                     Button {
                         //updateCallback()  TRT Change
                         show = false
-                        manager.forceViewUpdate = 1917
+                        manager.forceViewUpdate = Int.random(in: 70001...77777777)
                     } label: {
                         Text("Close")
-                            .font(.system(size: 24))
-                            .foregroundColor(.black)
+                            .font(.system(size: 25))
+                            .foregroundColor(.primary)
                     }
-                    .padding()
-                    .background(Color.white).cornerRadius(5)
+                    .frame(width: 120, height: 36)
+                    .background(RoundedRectangle(cornerRadius: 5)
+                        .fill(Color("softwhite"))
+                        .shadow(color: Color.gray.opacity(0.7), radius: 5, x: 0, y: 0)
+                        .mask(Rectangle().padding(.bottom, -1))
+                    )
                 }
+                .padding(.top, 15)
             }
             .environment(\.keyPadButtonAction, self.keyWasPressed(_:))
         }
@@ -72,16 +78,16 @@ struct CustomKeyPad: View {
                 string = ""
             case "⌫":
                 if string.isEmpty {
-                    string = "0"
+                    string = ""
                 } else {
                     string.removeLast()
                 }
-            case _ where string == "0": string = key
+            //case _ where string == "0": string = key
             default:
                 string += key
         }
         show = true
-        manager.forceViewUpdate = 1234
+        manager.forceViewUpdate = Int.random(in: 8001...888888)
         updateMessage()
     }
 }
@@ -97,11 +103,11 @@ struct KeyPadButton: View {
             VStack (spacing: 0) {
                 Text(key)
                     .font(key == "⌫" ? .system(size: 28): .system(size: 25))
-                    .foregroundColor(.black)
+                    .foregroundColor(.primary)
             }
-            .frame(width: 80.0, height: 38.0)
+            .frame(width: 72, height: 36)
             .background(RoundedRectangle(cornerRadius: 5)
-                .fill(Color.white)
+                .fill(Color("softwhite"))
                 .shadow(color: Color.gray.opacity(0.7), radius: 5, x: 0, y: 0)
                 .mask(Rectangle().padding(.bottom, -1))
             )
@@ -125,14 +131,4 @@ extension EnvironmentValues {
         }
     }
 }
-
-//struct KeyPadConstants {
-//    static let KEYPAD_WIDTH = 361.0
-//    static let KEYPAD_HEIGHT = 274.0
-//    static let KEYPAD_DONE_WIDTH = 284.0
-//    static let KEYPAD_DONE_HEIGHT = 38.0
-//    static let KEYPAD_BUTTON_WIDTH = 80.0
-//    static let KEYPAD_BUTTON_HEIGHT = 46.0
-//    static let KEYPAD_HEIGHT_WITH_DONE_BUTTON = KEYPAD_HEIGHT + KEYPAD_DONE_HEIGHT + 20.0
-//}
 

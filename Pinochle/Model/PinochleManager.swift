@@ -1809,9 +1809,12 @@ class PinochleManager: ObservableObject {
     }
     
     func validateWinningBidEntry(winningBidEntry: String) -> Bool {
+        print("winngBidEntry in validateWinningBidEntryof PinochleManager: \(winningBidEntry)")
+        //print("Int value of winningBidEntry: \(Int(winningBidEntry)!)")
         var isValid = false
         // Convert winning bid to an array to use in validator
         let trimmedWinningBidText = match.games[match.currentGameArrayIndex].hands[match.games[match.currentGameArrayIndex].currentHandArrayIndex].winningBidText.trimmingCharacters(in: .whitespacesAndNewlines)
+        print("trimmedWinningBidText in validateWinningBidEntryof PinochleManager: \(trimmedWinningBidText)")
         //let winningBidArray = [match.games[match.currentGameArrayIndex].hands[match.games[match.currentGameArrayIndex].currentHandArrayIndex].winningBidText]
         let winningBidArray = [trimmedWinningBidText]
         isValid = validateNumberTextFieldValues(numbersArrayParam: winningBidArray)
@@ -1823,7 +1826,7 @@ class PinochleManager: ObservableObject {
                     isValid = false
                 }
             case 4:
-                if Int(winningBidEntry)! < Int(settings.minimumOpeningBid4Players)! {
+                if Int(trimmedWinningBidText)! < Int(settings.minimumOpeningBid4Players)! {
                     isValid = false
                 }
             case 5:

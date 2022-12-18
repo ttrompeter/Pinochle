@@ -13,6 +13,8 @@ struct HandView: View {
     @EnvironmentObject var manager: PinochleManager
     @ObservedRealmObject var match: Match
     
+    @FocusState private var focus: AnyKeyPath?
+    
     @State var concedeGameWinnerText = "Unknown"
     @State private var isDisabledMeldEdit = false
     @State var showingBidderWasSetPopover = false
@@ -31,9 +33,32 @@ struct HandView: View {
     @State var showingUnlockedButton = false
     
     // Testing Custom KeyPad
-    @State var winningBidAmountText: String = " "
-    @State var isKeyPadVisibleWinningBid: Bool = false
-    @State var isKeyPadVisiblePlayer1Meld: Bool = false
+    @State var winningBidAmountText = ""
+    @State var isKeyPadVisibleWinningBid = false
+    @State var isKeyPadVisiblePlayer1Meld = false
+    @State var isKeyPadVisiblePlayer2Meld = false
+    @State var isKeyPadVisiblePlayer3Meld = false
+    @State var isKeyPadVisiblePlayer4Meld = false
+    @State var isKeyPadVisiblePlayer5Meld = false
+    @State var isKeyPadVisiblePlayer6Meld = false
+    
+    @State var isKeyPadVisiblePlayer1_3Meld = false
+    @State var isKeyPadVisiblePlayer2_3Meld = false
+    @State var isKeyPadVisiblePlayer3_3Meld = false
+    
+    @State var isKeyPadVisiblePlayer1_5Meld = false
+    @State var isKeyPadVisiblePlayer2_5Meld = false
+    @State var isKeyPadVisiblePlayer3_5Meld = false
+    @State var isKeyPadVisiblePlayer4_5Meld = false
+    @State var isKeyPadVisiblePlayer5_5Meld = false
+    
+    @State var isKeyPadVisibleBidWinnerTeamTrickPoints = false
+    @State var isKeyPadVisibleOtherTeamTrickPoints = false
+    @State var isKeyPadVisiblePlayer1TrickPoints = false
+    @State var isKeyPadVisiblePlayer2TrickPoints = false
+    @State var isKeyPadVisiblePlayer3TrickPoints = false
+    @State var isKeyPadVisiblePlayer4TrickPoints = false
+    @State var isKeyPadVisiblePlayer5TrickPoints = false
   
     var body: some View {
         
@@ -236,31 +261,48 @@ struct HandView: View {
                                 .disabled(manager.match.isDisabledBidWinnerPicker || !manager.match.isMatchSetupCompleted)
 
                                 HStack {
+                                    
                                     Text("Winning Bid: ")
+
+                                    TextEntryField(placeholder: "Bid", prompt: "Number", field: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].winningBidText)
+                                        .disabled(manager.match.isDisabledWinningBidTextField)
+                                        
+//                                    Text("\(manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].winningBidText)")
+//                                        .frame(width:60, height: 30)
+//                                        .foregroundColor(Color(.racinggreen))
+//                                        .font(.system(size: 24))
+//                                        .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color(.tan), lineWidth: 0.5))
+//                                        .popover(isPresented: $isKeyPadVisibleWinningBid, attachmentAnchor: .point(.trailing), arrowEdge: .leading) {
+//                                            ZStack {
+//                                                Color.gray.scaleEffect(1.5).opacity(0.2)
+//                                                CustomKeyPad(string: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].winningBidText, show: $isKeyPadVisibleWinningBid, updateCallback: { isKeyPadVisibleWinningBid = false }, updateMessage: { print(" ")}
+//                                                )
+//                                                .interactiveDismissDisabled(true)
+//                                            }
+//                                        }
+//                                        .onTapGesture {
+//                                            isKeyPadVisibleWinningBid.toggle()
+//                                        }
                                     
-                                    Text(manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].winningBidText)
-                                        .frame(width:60, height: 30)
-                                        .foregroundColor(Color(.racinggreen))
-                                        .font(.system(size: 24))
-                                        .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color(.tan), lineWidth: 0.5))
-                                        .popover(isPresented: $isKeyPadVisibleWinningBid, attachmentAnchor: .point(.trailing), arrowEdge: .leading) {
-                                            ZStack {
-                                                Color.gray.scaleEffect(1.5).opacity(0.2)
-                                                CustomKeyPad(string: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].winningBidText, show: $isKeyPadVisibleWinningBid, updateCallback: { isKeyPadVisibleWinningBid = false }, updateMessage: { print("\(winningBidAmountText)")}
-                                                )
-                                                .frame(width: 361.0, height: 332.0)
-                                                .interactiveDismissDisabled(true)
-                                            }
-                                        }
-                                        .onTapGesture {
-                                            isKeyPadVisibleWinningBid.toggle()
-                                        }
+//                                    TextField("Bid", text: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].winningBidText)
+//                                        .frame(width:60, height: 30)
+//                                        .foregroundColor(Color(.racinggreen))
+//                                        .disabled(manager.match.isDisabledPlayer1MeldTextField)
+//                                        .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color(.tan), lineWidth: 0.5))
+//                                        .popover(isPresented: $isKeyPadVisibleWinningBid, attachmentAnchor: .point(.trailing), arrowEdge: .leading) {
+//                                            ZStack {
+//                                                Color.gray.scaleEffect(1.5).opacity(0.2)
+//                                                CustomKeyPad(string: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].winningBidText, show: $isKeyPadVisibleWinningBid, updateCallback: { isKeyPadVisibleWinningBid = false }, updateMessage: { print("Unknown")}
+//                                                )
+//                                                //.frame(width: 270.0, height: 250.0)
+//                                                .interactiveDismissDisabled(true)
+//                                            }
+//                                        }
+//                                        .onTapGesture {
+//                                            isKeyPadVisibleWinningBid.toggle()
+//                                        }
                                     
                                     
-                                    
-                                    
-//                                    TextEntryField(placeholder: "Bid", prompt: "Number", field: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].winningBidText)
-//                                        .disabled(manager.match.isDisabledWinningBidTextField)
                                     
                                 }
                                 .popover(isPresented: $showingInvalidWinningBidPopover) {
@@ -378,9 +420,28 @@ struct HandView: View {
                                             Text("\(manager.match.player1Name):")
                                                 .frame(height: 25)
                                                 .lineLimit(1)
-
                                             TextEntryField(placeholder: "Meld", prompt: "Number", field: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player1MeldText)
                                                 .disabled(manager.match.isDisabledPlayer1MeldTextField)
+                                            
+//                                            TextField("Meld", text: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player1MeldText)
+//                                                .frame(width:60, height: 30)
+//                                                .foregroundColor(Color(.racinggreen))
+//                                                .disabled(manager.match.isDisabledPlayer1MeldTextField)
+//                                                .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color(.tan), lineWidth: 0.5))
+//                                                .popover(isPresented: $isKeyPadVisiblePlayer1_3Meld, attachmentAnchor: .point(.trailing), arrowEdge: .leading) {
+//                                                    ZStack {
+//                                                        Color.gray.scaleEffect(1.5).opacity(0.2)
+//                                                        CustomKeyPad(string: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player1MeldText, show: $isKeyPadVisiblePlayer1_3Meld, updateCallback: { isKeyPadVisiblePlayer1_3Meld = false }, updateMessage: { print("Unknown")}
+//                                                        )
+//                                                        //.frame(width: 361.0, height: 332.0)
+//                                                        .interactiveDismissDisabled(true)
+//                                                    }
+//                                                }
+//                                                .onTapGesture {
+//                                                    isKeyPadVisiblePlayer1_3Meld.toggle()
+//                                                }
+                                            
+                                            
                                         }
                                         Spacer()
                                         HStack {
@@ -389,6 +450,26 @@ struct HandView: View {
                                                 .lineLimit(1)
                                             TextEntryField(placeholder: "Meld", prompt: "Number", field: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player2MeldText)
                                                 .disabled(manager.match.isDisabledPlayer2MeldTextField)
+                                            
+//                                            TextField("Meld", text: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player2MeldText)
+//                                                .frame(width:60, height: 30)
+//                                                .foregroundColor(Color(.racinggreen))
+//                                                .disabled(manager.match.isDisabledPlayer2MeldTextField)
+//                                                .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color(.tan), lineWidth: 0.5))
+//                                                .popover(isPresented: $isKeyPadVisiblePlayer2_3Meld, attachmentAnchor: .point(.trailing), arrowEdge: .leading) {
+//                                                    ZStack {
+//                                                        Color.gray.scaleEffect(1.5).opacity(0.2)
+//                                                        CustomKeyPad(string: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player2MeldText, show: $isKeyPadVisiblePlayer2_3Meld, updateCallback: { isKeyPadVisiblePlayer2_3Meld = false }, updateMessage: { print("Unknown")}
+//                                                        )
+//                                                        //.frame(width: 361.0, height: 332.0)
+//                                                        .interactiveDismissDisabled(true)
+//                                                    }
+//                                                }
+//                                                .onTapGesture {
+//                                                    isKeyPadVisiblePlayer2_3Meld.toggle()
+//                                                }
+                                            
+                                            
                                         }
                                         Spacer()
                                     }
@@ -396,9 +477,28 @@ struct HandView: View {
                                         Text("\(manager.match.player3Name):")
                                             .frame(height: 25)
                                             .lineLimit(1)
-                                        
                                         TextEntryField(placeholder: "Meld", prompt: "Number", field: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player3MeldText)
                                             .disabled(manager.match.isDisabledPlayer3MeldTextField)
+                                        
+//                                        TextField("Meld", text: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player3MeldText)
+//                                            .frame(width:60, height: 30)
+//                                            .foregroundColor(Color(.racinggreen))
+//                                            .disabled(manager.match.isDisabledPlayer3MeldTextField)
+//                                            .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color(.tan), lineWidth: 0.5))
+//                                            .popover(isPresented: $isKeyPadVisiblePlayer3_3Meld, attachmentAnchor: .point(.trailing), arrowEdge: .leading) {
+//                                                ZStack {
+//                                                    Color.gray.scaleEffect(1.5).opacity(0.2)
+//                                                    CustomKeyPad(string: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player3MeldText, show: $isKeyPadVisiblePlayer3_3Meld, updateCallback: { isKeyPadVisiblePlayer3_3Meld = false }, updateMessage: { print("Unknown")}
+//                                                    )
+//                                                    //.frame(width: 361.0, height: 332.0)
+//                                                    .interactiveDismissDisabled(true)
+//                                                }
+//                                            }
+//                                            .onTapGesture {
+//                                                isKeyPadVisiblePlayer3_3Meld.toggle()
+//                                            }
+                                        
+                                       
                                     }
                                     .padding(.top, 10)
                                 }
@@ -432,26 +532,81 @@ struct HandView: View {
                                             VStack (alignment: .trailing) {
         // manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].winningBidText
         // manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player1MeldText
+                                                TextEntryField(placeholder: "Meld", prompt: "Number", field: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player1MeldText)
+                                                    .disabled(manager.match.isDisabledPlayer1MeldTextField)
                                                 
-                                                Text(winningBidAmountText)
-                                                    .frame(width:60, height: 30)
-                                                    .foregroundColor(Color(.racinggreen))
-                                                    .font(.system(size: 24))
-                                                    .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color(.tan), lineWidth: 0.5))
-                                                    .popover(isPresented: $isKeyPadVisiblePlayer1Meld, attachmentAnchor: .point(.trailing), arrowEdge: .leading) {
-                                                        ZStack {
-                                                            Color.gray.scaleEffect(1.5).opacity(0.2)
-                                                            CustomKeyPad(string: $winningBidAmountText, show: $isKeyPadVisiblePlayer1Meld, updateCallback: { isKeyPadVisiblePlayer1Meld = false }, updateMessage: { print("updateMessage: \(winningBidAmountText)")}
-                                                            )
-                                                            .frame(width: 361.0, height: 332.0)
-                                                            .interactiveDismissDisabled(true)
-                                                        }
-                                                    }
-                                                    .onTapGesture {
-                                                        isKeyPadVisiblePlayer1Meld.toggle()
-                                                    }
+                                                TextEntryField(placeholder: "Meld", prompt: "Number", field: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player3MeldText)
+                                                    .disabled(manager.match.isDisabledPlayer3MeldTextField)
+//                                                Text(manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player1MeldText)
+//                                                    .frame(width:60, height: 30)
+//                                                    .foregroundColor(Color(.racinggreen))
+//                                                    .font(.system(size: 24))
+//                                                    .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color(.tan), lineWidth: 0.5))
+//                                                    .popover(isPresented: $isKeyPadVisiblePlayer1Meld, attachmentAnchor: .point(.trailing), arrowEdge: .leading) {
+//                                                        ZStack {
+//                                                            Color.gray.scaleEffect(1.5).opacity(0.2)
+//                                                            CustomKeyPad(string: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player1MeldText, show: $isKeyPadVisiblePlayer1Meld, updateCallback: { isKeyPadVisiblePlayer1Meld = false }, updateMessage: { print(" ")}
+//                                                            )
+//                                                            .interactiveDismissDisabled(true)
+//                                                        }
+//                                                    }
+//                                                    .onTapGesture {
+//                                                        isKeyPadVisiblePlayer1Meld.toggle()
+//                                                    }
+                                                
+//                                                Text(manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player3MeldText)
+//                                                    .frame(width:60, height: 30)
+//                                                    .foregroundColor(Color(.racinggreen))
+//                                                    .font(.system(size: 24))
+//                                                    .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color(.tan), lineWidth: 0.5))
+//                                                    .popover(isPresented: $isKeyPadVisiblePlayer3Meld, attachmentAnchor: .point(.trailing), arrowEdge: .leading) {
+//                                                        ZStack {
+//                                                            Color.gray.scaleEffect(1.5).opacity(0.2)
+//                                                            CustomKeyPad(string: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player3MeldText, show: $isKeyPadVisiblePlayer3Meld, updateCallback: { isKeyPadVisiblePlayer3Meld = false }, updateMessage: { print(" ")}
+//                                                            )
+//                                                            .interactiveDismissDisabled(true)
+//                                                        }
+//                                                    }
+//                                                    .onTapGesture {
+//                                                        isKeyPadVisiblePlayer3Meld.toggle()
+//                                                    }
                                                 
                                                 
+//                                                TextField("Meld", text: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player1MeldText)
+//                                                    .frame(width:60, height: 30)
+//                                                    .foregroundColor(Color(.racinggreen))
+//                                                    .disabled(manager.match.isDisabledPlayer1MeldTextField)
+//                                                    .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color(.tan), lineWidth: 0.5))
+//                                                    .popover(isPresented: $isKeyPadVisiblePlayer1Meld, attachmentAnchor: .point(.trailing), arrowEdge: .leading) {
+//                                                        ZStack {
+//                                                            Color.gray.scaleEffect(1.5).opacity(0.2)
+//                                                            CustomKeyPad(string: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player1MeldText, show: $isKeyPadVisiblePlayer1Meld, updateCallback: { isKeyPadVisiblePlayer1Meld = false }, updateMessage: { print("Unknown")}
+//                                                            )
+//                                                            //.frame(width: 361.0, height: 332.0)
+//                                                            .interactiveDismissDisabled(true)
+//                                                        }
+//                                                    }
+//                                                    .onTapGesture {
+//                                                        isKeyPadVisiblePlayer1Meld.toggle()
+//                                                    }
+                                                
+//                                                TextField("Meld", text: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player3MeldText)
+//                                                    .frame(width:60, height: 30)
+//                                                    .foregroundColor(Color(.racinggreen))
+//                                                    .disabled(manager.match.isDisabledPlayer3MeldTextField)
+//                                                    .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color(.tan), lineWidth: 0.5))
+//                                                    .popover(isPresented: $isKeyPadVisiblePlayer3Meld, attachmentAnchor: .point(.trailing), arrowEdge: .leading) {
+//                                                        ZStack {
+//                                                            Color.gray.scaleEffect(1.5).opacity(0.2)
+//                                                            CustomKeyPad(string: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player3MeldText, show: $isKeyPadVisiblePlayer3Meld, updateCallback: { isKeyPadVisiblePlayer3Meld = false }, updateMessage: { print("Unknown")}
+//                                                            )
+//                                                            //.frame(width: 361.0, height: 332.0)
+//                                                            .interactiveDismissDisabled(true)
+//                                                        }
+//                                                    }
+//                                                    .onTapGesture {
+//                                                        isKeyPadVisiblePlayer3Meld.toggle()
+//                                                    }
                                                 
                                                 
                                                 
@@ -473,16 +628,45 @@ struct HandView: View {
 //                                                        isKeyPadVisiblePlayer1Meld.toggle()
 //                                                    }
                                                 
-//                                                TextEntryField(placeholder: "Meld", prompt: "Number", field: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player1MeldText)
-//                                                    .disabled(manager.match.isDisabledPlayer1MeldTextField)
-                                                
-                                                TextEntryField(placeholder: "Meld", prompt: "Number", field: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player3MeldText)
-                                                    .disabled(manager.match.isDisabledPlayer3MeldTextField)
                                                 
                                                 if manager.match.selectedNumberOfPlayers == 6 {
-                                                    
                                                     TextEntryField(placeholder: "Meld", prompt: "Number", field: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player5MeldText)
                                                         .disabled(manager.match.isDisabledPlayer5MeldTextField)
+//                                                    Text(manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player5MeldText)
+//                                                        .frame(width:60, height: 30)
+//                                                        .foregroundColor(Color(.racinggreen))
+//                                                        .font(.system(size: 24))
+//                                                        .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color(.tan), lineWidth: 0.5))
+//                                                        .popover(isPresented: $isKeyPadVisiblePlayer5Meld, attachmentAnchor: .point(.trailing), arrowEdge: .leading) {
+//                                                            ZStack {
+//                                                                Color.gray.scaleEffect(1.5).opacity(0.2)
+//                                                                CustomKeyPad(string: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player5MeldText, show: $isKeyPadVisiblePlayer5Meld, updateCallback: { isKeyPadVisiblePlayer6Meld = false }, updateMessage: { print(" ")}
+//                                                                )
+//                                                                .interactiveDismissDisabled(true)
+//                                                            }
+//                                                        }
+//                                                        .onTapGesture {
+//                                                            isKeyPadVisiblePlayer5Meld.toggle()
+//                                                        }
+                                                    
+//                                                    TextField("Meld", text: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player5MeldText)
+//                                                        .frame(width:60, height: 30)
+//                                                        .foregroundColor(Color(.racinggreen))
+//                                                        .disabled(manager.match.isDisabledPlayer5MeldTextField)
+//                                                        .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color(.tan), lineWidth: 0.5))
+//                                                        .popover(isPresented: $isKeyPadVisiblePlayer5Meld, attachmentAnchor: .point(.trailing), arrowEdge: .leading) {
+//                                                            ZStack {
+//                                                                Color.gray.scaleEffect(1.5).opacity(0.2)
+//                                                                CustomKeyPad(string: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player5MeldText, show: $isKeyPadVisiblePlayer5Meld, updateCallback: { isKeyPadVisiblePlayer5Meld = false }, updateMessage: { print("Unknown")}
+//                                                                )
+//                                                                //.frame(width: 361.0, height: 332.0)
+//                                                                .interactiveDismissDisabled(true)
+//                                                            }
+//                                                        }
+//                                                        .onTapGesture {
+//                                                            isKeyPadVisiblePlayer5Meld.toggle()
+//                                                        }
+                                                    
                                                 }
                                             }
                                         }
@@ -518,17 +702,125 @@ struct HandView: View {
                                             }
                                             Text("     ")
                                             VStack (alignment: .trailing) {
-                                                
                                                 TextEntryField(placeholder: "Meld", prompt: "Number", field: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player2MeldText)
                                                     .disabled(manager.match.isDisabledPlayer1MeldTextField)
-                                                
+
                                                 TextEntryField(placeholder: "Meld", prompt: "Number", field: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player4MeldText)
                                                     .disabled(manager.match.isDisabledPlayer4MeldTextField)
                                                 
+//                                                Text(manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player2MeldText)
+//                                                    .frame(width:60, height: 30)
+//                                                    .foregroundColor(Color(.racinggreen))
+//                                                    .font(.system(size: 24))
+//                                                    .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color(.tan), lineWidth: 0.5))
+//                                                    .popover(isPresented: $isKeyPadVisiblePlayer2Meld, attachmentAnchor: .point(.trailing), arrowEdge: .leading) {
+//                                                        ZStack {
+//                                                            Color.gray.scaleEffect(1.5).opacity(0.2)
+//                                                            CustomKeyPad(string: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player2MeldText, show: $isKeyPadVisiblePlayer2Meld, updateCallback: { isKeyPadVisiblePlayer2Meld = false }, updateMessage: { print(" ")}
+//                                                            )
+//                                                            .interactiveDismissDisabled(true)
+//                                                        }
+//                                                    }
+//                                                    .onTapGesture {
+//                                                        isKeyPadVisiblePlayer2Meld.toggle()
+//                                                    }
+//
+//                                                Text(manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player4MeldText)
+//                                                    .frame(width:60, height: 30)
+//                                                    .foregroundColor(Color(.racinggreen))
+//                                                    .font(.system(size: 24))
+//                                                    .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color(.tan), lineWidth: 0.5))
+//                                                    .popover(isPresented: $isKeyPadVisiblePlayer4Meld, attachmentAnchor: .point(.trailing), arrowEdge: .leading) {
+//                                                        ZStack {
+//                                                            Color.gray.scaleEffect(1.5).opacity(0.2)
+//                                                            CustomKeyPad(string: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player4MeldText, show: $isKeyPadVisiblePlayer4Meld, updateCallback: { isKeyPadVisiblePlayer4Meld = false }, updateMessage: { print(" ")}
+//                                                            )
+//                                                            .interactiveDismissDisabled(true)
+//                                                        }
+//                                                    }
+//                                                    .onTapGesture {
+//                                                        isKeyPadVisiblePlayer4Meld.toggle()
+//                                                    }
+                                                
+                                                
+//                                                TextField("Meld", text: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player2MeldText)
+//                                                    .frame(width:60, height: 30)
+//                                                    .foregroundColor(Color(.racinggreen))
+//                                                    .disabled(manager.match.isDisabledPlayer2MeldTextField)
+//                                                    .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color(.tan), lineWidth: 0.5))
+//                                                    .popover(isPresented: $isKeyPadVisiblePlayer2Meld, attachmentAnchor: .point(.leading), arrowEdge: .leading) {
+//                                                        ZStack {
+//                                                            Color.gray.scaleEffect(1.5).opacity(0.2)
+//                                                            CustomKeyPad(string: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player2MeldText, show: $isKeyPadVisiblePlayer2Meld, updateCallback: { isKeyPadVisiblePlayer2Meld = false }, updateMessage: { print("Unknown")}
+//                                                            )
+//                                                            //.frame(width: 361.0, height: 332.0)
+//                                                            .interactiveDismissDisabled(true)
+//                                                        }
+//                                                    }
+//                                                    .onTapGesture {
+//                                                        isKeyPadVisiblePlayer2Meld.toggle()
+//                                                    }
+//
+//                                                TextField("Meld", text: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player4MeldText)
+//                                                    .frame(width:60, height: 30)
+//                                                    .foregroundColor(Color(.racinggreen))
+//                                                    .disabled(manager.match.isDisabledPlayer4MeldTextField)
+//                                                    .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color(.tan), lineWidth: 0.5))
+//                                                    .popover(isPresented: $isKeyPadVisiblePlayer4Meld, attachmentAnchor: .point(.leading), arrowEdge: .leading) {
+//                                                        ZStack {
+//                                                            Color.gray.scaleEffect(1.5).opacity(0.2)
+//                                                            CustomKeyPad(string: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player4MeldText, show: $isKeyPadVisiblePlayer4Meld, updateCallback: { isKeyPadVisiblePlayer4Meld = false }, updateMessage: { print("Unknown")}
+//                                                            )
+//                                                            //.frame(width: 361.0, height: 332.0)
+//                                                            .interactiveDismissDisabled(true)
+//                                                        }
+//                                                    }
+//                                                    .onTapGesture {
+//                                                        isKeyPadVisiblePlayer4Meld.toggle()
+//                                                    }
+                                                
+                                                
+                                                
                                                 if manager.match.selectedNumberOfPlayers == 6 {
-                                                    
                                                     TextEntryField(placeholder: "Meld", prompt: "Number", field: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player6MeldText)
                                                         .disabled(manager.match.isDisabledPlayer6MeldTextField)
+                                                    
+//                                                    Text(manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player6MeldText)
+//                                                        .frame(width:60, height: 30)
+//                                                        .foregroundColor(Color(.racinggreen))
+//                                                        .font(.system(size: 24))
+//                                                        .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color(.tan), lineWidth: 0.5))
+//                                                        .popover(isPresented: $isKeyPadVisiblePlayer6Meld, attachmentAnchor: .point(.trailing), arrowEdge: .leading) {
+//                                                            ZStack {
+//                                                                Color.gray.scaleEffect(1.5).opacity(0.2)
+//                                                                CustomKeyPad(string: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player6MeldText, show: $isKeyPadVisiblePlayer6Meld, updateCallback: { isKeyPadVisiblePlayer6Meld = false }, updateMessage: { print(" ")}
+//                                                                )
+//                                                                .interactiveDismissDisabled(true)
+//                                                            }
+//                                                        }
+//                                                        .onTapGesture {
+//                                                            isKeyPadVisiblePlayer6Meld.toggle()
+//                                                        }
+                                                    
+//                                                    TextField("Meld", text: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player6MeldText)
+//                                                        .frame(width:60, height: 30)
+//                                                        .foregroundColor(Color(.racinggreen))
+//                                                        .disabled(manager.match.isDisabledPlayer6MeldTextField)
+//                                                        .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color(.tan), lineWidth: 0.5))
+//                                                        .popover(isPresented: $isKeyPadVisiblePlayer6Meld, attachmentAnchor: .point(.leading), arrowEdge: .leading) {
+//                                                            ZStack {
+//                                                                Color.gray.scaleEffect(1.5).opacity(0.2)
+//                                                                CustomKeyPad(string: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player6MeldText, show: $isKeyPadVisiblePlayer6Meld, updateCallback: { isKeyPadVisiblePlayer6Meld = false }, updateMessage: { print("Unknown")}
+//                                                                )
+//                                                                //.frame(width: 361.0, height: 332.0)
+//                                                                .interactiveDismissDisabled(true)
+//                                                            }
+//                                                        }
+//                                                        .onTapGesture {
+//                                                            isKeyPadVisiblePlayer6Meld.toggle()
+//                                                        }
+                                                    
+                                                    
                                                 }
                                             }
                                         }
@@ -562,15 +854,70 @@ struct HandView: View {
                                         }
                                         Text("     ")
                                         VStack (alignment: .trailing) {
-                                            
                                             TextEntryField(placeholder: "Meld", prompt: "Number", field: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player1MeldText)
                                                 .disabled(manager.match.isDisabledPlayer1MeldTextField)
-                                            
+
                                             TextEntryField(placeholder: "Meld", prompt: "Number", field: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player3MeldText)
                                                 .disabled(manager.match.isDisabledPlayer3MeldTextField)
-                                            
+
                                             TextEntryField(placeholder: "Meld", prompt: "Number", field: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player5MeldText)
                                                 .disabled(manager.match.isDisabledPlayer5MeldTextField)
+                                            
+//                                            TextField("Meld", text: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player1MeldText)
+//                                                .frame(width:60, height: 30)
+//                                                .foregroundColor(Color(.racinggreen))
+//                                                .disabled(manager.match.isDisabledPlayer1MeldTextField)
+//                                                .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color(.tan), lineWidth: 0.5))
+//                                                .popover(isPresented: $isKeyPadVisiblePlayer1_5Meld, attachmentAnchor: .point(.trailing), arrowEdge: .leading) {
+//                                                    ZStack {
+//                                                        Color.gray.scaleEffect(1.5).opacity(0.2)
+//                                                        CustomKeyPad(string: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player1MeldText, show: $isKeyPadVisiblePlayer1_5Meld, updateCallback: { isKeyPadVisiblePlayer1_5Meld = false }, updateMessage: { print("Unknown")}
+//                                                        )
+//                                                        //.frame(width: 361.0, height: 332.0)
+//                                                        .interactiveDismissDisabled(true)
+//                                                    }
+//                                                }
+//                                                .onTapGesture {
+//                                                    isKeyPadVisiblePlayer1_5Meld.toggle()
+//                                                }
+//
+//                                            TextField("Meld", text: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player3MeldText)
+//                                                .frame(width:60, height: 30)
+//                                                .foregroundColor(Color(.racinggreen))
+//                                                .disabled(manager.match.isDisabledPlayer3MeldTextField)
+//                                                .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color(.tan), lineWidth: 0.5))
+//                                                .popover(isPresented: $isKeyPadVisiblePlayer3_5Meld, attachmentAnchor: .point(.trailing), arrowEdge: .leading) {
+//                                                    ZStack {
+//                                                        Color.gray.scaleEffect(1.5).opacity(0.2)
+//                                                        CustomKeyPad(string: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player3MeldText, show: $isKeyPadVisiblePlayer3_5Meld, updateCallback: { isKeyPadVisiblePlayer3_5Meld = false }, updateMessage: { print("Unknown")}
+//                                                        )
+//                                                        //.frame(width: 361.0, height: 332.0)
+//                                                        .interactiveDismissDisabled(true)
+//                                                    }
+//                                                }
+//                                                .onTapGesture {
+//                                                    isKeyPadVisiblePlayer3_5Meld.toggle()
+//                                                }
+//
+//                                            TextField("Meld", text: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player5MeldText)
+//                                                .frame(width:60, height: 30)
+//                                                .foregroundColor(Color(.racinggreen))
+//                                                .disabled(manager.match.isDisabledPlayer5MeldTextField)
+//                                                .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color(.tan), lineWidth: 0.5))
+//                                                .popover(isPresented: $isKeyPadVisiblePlayer5_5Meld, attachmentAnchor: .point(.trailing), arrowEdge: .leading) {
+//                                                    ZStack {
+//                                                        Color.gray.scaleEffect(1.5).opacity(0.2)
+//                                                        CustomKeyPad(string: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player5MeldText, show: $isKeyPadVisiblePlayer5_5Meld, updateCallback: { isKeyPadVisiblePlayer5_5Meld = false }, updateMessage: { print("Unknown")}
+//                                                        )
+//                                                        //.frame(width: 361.0, height: 332.0)
+//                                                        .interactiveDismissDisabled(true)
+//                                                    }
+//                                                }
+//                                                .onTapGesture {
+//                                                    isKeyPadVisiblePlayer5_5Meld.toggle()
+//                                                }
+                                            
+                                            
                                         }
                                     }
                                     .padding(.horizontal, 10)
@@ -591,12 +938,50 @@ struct HandView: View {
                                         }
                                         Text("     ")
                                         VStack (alignment: .trailing) {
-                                            
                                             TextEntryField(placeholder: "Meld", prompt: "Number", field: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player2MeldText)
                                                 .disabled(manager.match.isDisabledPlayer2MeldTextField)
-                                            
+
                                             TextEntryField(placeholder: "Meld", prompt: "Number", field: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player4MeldText)
                                                 .disabled(manager.match.isDisabledPlayer4MeldTextField)
+                                            
+//                                            TextField("Meld", text: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player2MeldText)
+//                                                .frame(width:60, height: 30)
+//                                                .foregroundColor(Color(.racinggreen))
+//                                                .disabled(manager.match.isDisabledPlayer2MeldTextField)
+//                                                .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color(.tan), lineWidth: 0.5))
+//                                                .popover(isPresented: $isKeyPadVisiblePlayer2_5Meld, attachmentAnchor: .point(.trailing), arrowEdge: .leading) {
+//                                                    ZStack {
+//                                                        Color.gray.scaleEffect(1.5).opacity(0.2)
+//                                                        CustomKeyPad(string: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player2MeldText, show: $isKeyPadVisiblePlayer2_5Meld, updateCallback: { isKeyPadVisiblePlayer2_5Meld = false }, updateMessage: { print("Unknown")}
+//                                                        )
+//                                                        //.frame(width: 361.0, height: 332.0)
+//                                                        .interactiveDismissDisabled(true)
+//                                                    }
+//                                                }
+//                                                .onTapGesture {
+//                                                    isKeyPadVisiblePlayer2_5Meld.toggle()
+//                                                }
+//
+//                                            TextField("Meld", text: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player4MeldText)
+//                                                .frame(width:60, height: 30)
+//                                                .foregroundColor(Color(.racinggreen))
+//                                                .disabled(manager.match.isDisabledPlayer4MeldTextField)
+//                                                .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color(.tan), lineWidth: 0.5))
+//                                                .popover(isPresented: $isKeyPadVisiblePlayer4_5Meld, attachmentAnchor: .point(.trailing), arrowEdge: .leading) {
+//                                                    ZStack {
+//                                                        Color.gray.scaleEffect(1.5).opacity(0.2)
+//                                                        CustomKeyPad(string: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player4MeldText, show: $isKeyPadVisiblePlayer4_5Meld, updateCallback: { isKeyPadVisiblePlayer4_5Meld = false }, updateMessage: { print("Unknown")}
+//                                                        )
+//                                                        //.frame(width: 361.0, height: 332.0)
+//                                                        .interactiveDismissDisabled(true)
+//                                                    }
+//                                                }
+//                                                .onTapGesture {
+//                                                    isKeyPadVisiblePlayer4_5Meld.toggle()
+//                                                }
+                                            
+                                            
+                                            
                                             // TODO: - Should be empty spacer to balance layout
                                             Text("")
                                                 .frame(width:50, height: 30)
@@ -718,9 +1103,29 @@ struct HandView: View {
                                             Text("\(manager.match.player1Name):")
                                                 .frame(width:140, height: 30)
                                                 .lineLimit(1)
-                                            
                                             TextEntryField(placeholder: "Tricks", prompt: "Number", field: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player1TrickPointsText)
                                                 .disabled(manager.match.isDisabledPlayer1TrickPointsTextField)
+                                            
+                                            
+//                                            TextField("Tricks", text: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player1TrickPointsText)
+//                                                .frame(width:60, height: 30)
+//                                                .foregroundColor(Color(.racinggreen))
+//                                                .disabled(manager.match.isDisabledPlayer1TrickPointsTextField)
+//                                                .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color(.tan), lineWidth: 0.5))
+//                                                .popover(isPresented: $isKeyPadVisiblePlayer1TrickPoints, attachmentAnchor: .point(.trailing), arrowEdge: .leading) {
+//                                                    ZStack {
+//                                                        Color.gray.scaleEffect(1.5).opacity(0.2)
+//                                                        CustomKeyPad(string: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player1TrickPointsText, show: $isKeyPadVisiblePlayer1TrickPoints, updateCallback: { isKeyPadVisiblePlayer1TrickPoints = false }, updateMessage: { print("Unknown")}
+//                                                        )
+//                                                        .frame(width: 361.0, height: 332.0)
+//                                                        .interactiveDismissDisabled(true)
+//                                                    }
+//                                                }
+//                                                .onTapGesture {
+//                                                    isKeyPadVisiblePlayer1TrickPoints.toggle()
+//                                                }
+                                            
+                                            
                                         }
                                         Spacer()
                                         HStack {
@@ -729,6 +1134,26 @@ struct HandView: View {
                                                 .lineLimit(1)
                                             TextEntryField(placeholder: "Tricks", prompt: "Number", field: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player2TrickPointsText)
                                                 .disabled(manager.match.isDisabledPlayer2TrickPointsTextField)
+                                            
+//                                            TextField("Tricks", text: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player2TrickPointsText)
+//                                                .frame(width:60, height: 30)
+//                                                .foregroundColor(Color(.racinggreen))
+//                                                .disabled(manager.match.isDisabledPlayer2TrickPointsTextField)
+//                                                .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color(.tan), lineWidth: 0.5))
+//                                                .popover(isPresented: $isKeyPadVisiblePlayer2TrickPoints, attachmentAnchor: .point(.trailing), arrowEdge: .leading) {
+//                                                    ZStack {
+//                                                        Color.gray.scaleEffect(1.5).opacity(0.2)
+//                                                        CustomKeyPad(string: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player2TrickPointsText, show: $isKeyPadVisiblePlayer2TrickPoints, updateCallback: { isKeyPadVisiblePlayer2TrickPoints = false }, updateMessage: { print("Unknown")}
+//                                                        )
+//                                                        .frame(width: 361.0, height: 332.0)
+//                                                        .interactiveDismissDisabled(true)
+//                                                    }
+//                                                }
+//                                                .onTapGesture {
+//                                                    isKeyPadVisiblePlayer2TrickPoints.toggle()
+//                                                }
+                                            
+                                            
                                         }
                                         Spacer()
                                     }
@@ -736,9 +1161,28 @@ struct HandView: View {
                                         Text("\(manager.match.player3Name):")
                                             .frame(width:140, height: 30)
                                             .lineLimit(1)
-                                        
                                         TextEntryField(placeholder: "Tricks", prompt: "Number", field: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player3TrickPointsText)
                                             .disabled(manager.match.isDisabledPlayer3TrickPointsTextField)
+                                        
+//                                        TextField("Tricks", text: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player3TrickPointsText)
+//                                            .frame(width:60, height: 30)
+//                                            .foregroundColor(Color(.racinggreen))
+//                                            .disabled(manager.match.isDisabledPlayer3TrickPointsTextField)
+//                                            .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color(.tan), lineWidth: 0.5))
+//                                            .popover(isPresented: $isKeyPadVisiblePlayer3TrickPoints, attachmentAnchor: .point(.trailing), arrowEdge: .leading) {
+//                                                ZStack {
+//                                                    Color.gray.scaleEffect(1.5).opacity(0.2)
+//                                                    CustomKeyPad(string: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].player3TrickPointsText, show: $isKeyPadVisiblePlayer3TrickPoints, updateCallback: { isKeyPadVisiblePlayer3TrickPoints = false }, updateMessage: { print("Unknown")}
+//                                                    )
+//                                                    .frame(width: 361.0, height: 332.0)
+//                                                    .interactiveDismissDisabled(true)
+//                                                }
+//                                            }
+//                                            .onTapGesture {
+//                                                isKeyPadVisiblePlayer3TrickPoints.toggle()
+//                                            }
+                                        
+                                        
                                     }
                                     .padding(.top, 10)
                                 }
@@ -757,12 +1201,49 @@ struct HandView: View {
                                 }
                                 Text("     ")
                                 VStack (alignment: .trailing) {
-                                    
                                     TextEntryField(placeholder: "Tricks", prompt: "Number", field: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].bidWinnerTeamTrickPointsText)
                                         .disabled(manager.match.isDisabledBidWinnerTrickPointsTextField)
-                                    
+
                                     TextEntryField(placeholder: "Tricks", prompt: "Number", field: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].otherTeamTrickPointsText)
                                         .disabled(manager.match.isDisabledOtherTeamTrickPointsTextField)
+                                    
+//                                    TextField("Tricks", text: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].bidWinnerTeamTrickPointsText)
+//                                        .frame(width:60, height: 30)
+//                                        .foregroundColor(Color(.racinggreen))
+//                                        .disabled(manager.match.isDisabledBidWinnerTrickPointsTextField)
+//                                        .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color(.tan), lineWidth: 0.5))
+//                                        .popover(isPresented: $isKeyPadVisibleBidWinnerTeamTrickPoints, attachmentAnchor: .point(.trailing), arrowEdge: .leading) {
+//                                            ZStack {
+//                                                Color.gray.scaleEffect(1.5).opacity(0.2)
+//                                                CustomKeyPad(string: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].bidWinnerTeamTrickPointsText, show: $isKeyPadVisibleBidWinnerTeamTrickPoints, updateCallback: { isKeyPadVisibleBidWinnerTeamTrickPoints = false }, updateMessage: { print("Unknown")}
+//                                                )
+//                                                .frame(width: 361.0, height: 332.0)
+//                                                .interactiveDismissDisabled(true)
+//                                            }
+//                                        }
+//                                        .onTapGesture {
+//                                            isKeyPadVisibleBidWinnerTeamTrickPoints.toggle()
+//                                        }
+                                    
+//                                    TextField("Tricks", text: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].otherTeamTrickPointsText)
+//                                        .frame(width:60, height: 30)
+//                                        .foregroundColor(Color(.racinggreen))
+//                                        .disabled(manager.match.isDisabledOtherTeamTrickPointsTextField)
+//                                        .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color(.tan), lineWidth: 0.5))
+//                                        .popover(isPresented: $isKeyPadVisibleOtherTeamTrickPoints, attachmentAnchor: .point(.trailing), arrowEdge: .leading) {
+//                                            ZStack {
+//                                                Color.gray.scaleEffect(1.5).opacity(0.2)
+//                                                CustomKeyPad(string: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].otherTeamTrickPointsText, show: $isKeyPadVisibleOtherTeamTrickPoints, updateCallback: { isKeyPadVisibleOtherTeamTrickPoints = false }, updateMessage: { print("Unknown")}
+//                                                )
+//                                                .frame(width: 361.0, height: 332.0)
+//                                                .interactiveDismissDisabled(true)
+//                                            }
+//                                        }
+//                                        .onTapGesture {
+//                                            isKeyPadVisibleOtherTeamTrickPoints.toggle()
+//                                        }
+                                    
+                                    
                                 }
                                 Spacer()
                             }
@@ -1197,6 +1678,19 @@ struct HandView: View {
         .foregroundColor(Color(.racinggreen))
         .navigationBarTitle("")
         .navigationBarHidden(true)
+        .toolbar {
+            // This will add a dismiss button to the keyboard toolbar
+            ToolbarItem(placement: .keyboard) {
+                    Spacer()
+            }
+            ToolbarItem(placement: .keyboard) {
+                    Button {
+                        focus = nil
+                    } label: {
+                        Image(systemName: "keyboard.chevron.compact.down")
+                    }
+            }
+        }
         .fullScreenCover(isPresented: $manager.match.showingMatchSetupSheet, content: {
             MatchSetupSheet(match: manager.match, settings: manager.settings)
                 .withDismissButton()
