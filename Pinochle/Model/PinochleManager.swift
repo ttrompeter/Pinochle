@@ -705,7 +705,7 @@ class PinochleManager: ObservableObject {
             do {
                 try realm.write {
                     // Save trick points and update scores in Game
-                    if match.selectedNumberOfPlayers == 3 {
+                if match.selectedNumberOfPlayers == 3 {
                         if match.games[match.currentGameArrayIndex].hands[match.games[match.currentGameArrayIndex].currentHandArrayIndex].bidderWasSet {
                             // Need to adjust player's score for the bid winner who was set back to pre-set value
                             // For other players it is just a matter of subtracting the previous trick points which was already done in saveEditHandPlayTrickPoints
@@ -749,6 +749,16 @@ class PinochleManager: ObservableObject {
                         print("player1 score after being set in updateScoreWithTrickPoints(): \(match.games[match.currentGameArrayIndex].player1Score)")
                         match.games[match.currentGameArrayIndex].player2Score += Int(match.games[match.currentGameArrayIndex].hands[match.games[match.currentGameArrayIndex].currentHandArrayIndex].player2TrickPointsText)!
                         match.games[match.currentGameArrayIndex].player3Score += Int(match.games[match.currentGameArrayIndex].hands[match.games[match.currentGameArrayIndex].currentHandArrayIndex].player3TrickPointsText)!
+                    
+                        // Check if any player has zero trick points and, if so, adjust score to subtract meld points as a penalty
+                        if Int(match.savedPlayer1TrickPointsText)! == 0  {
+                            match.games[match.currentGameArrayIndex].player1Score -= Int(match.games[match.currentGameArrayIndex].hands[match.games[match.currentGameArrayIndex].currentHandArrayIndex].player1MeldText)!
+                        } else if Int(match.savedPlayer2TrickPointsText)! == 0  {
+                            match.games[match.currentGameArrayIndex].player2Score -= Int(match.games[match.currentGameArrayIndex].hands[match.games[match.currentGameArrayIndex].currentHandArrayIndex].player2MeldText)!
+                        } else if Int(match.savedPlayer3TrickPointsText)! == 0  {
+                            match.games[match.currentGameArrayIndex].player3Score -= Int(match.games[match.currentGameArrayIndex].hands[match.games[match.currentGameArrayIndex].currentHandArrayIndex].player3MeldText)!
+                        }
+                    
                     } else if match.selectedNumberOfPlayers == 4 || match.selectedNumberOfPlayers == 6 {
                         // 4 & 6 players Game
                         print("In 4 or 6 players statement of upateScoreWithTrickPoints")
@@ -800,9 +810,19 @@ class PinochleManager: ObservableObject {
                         } else {
                             // Team 2 is bid winner - set score for Team 1 and Team 2
                             match.games[match.currentGameArrayIndex].team1Score += Int(match.games[match.currentGameArrayIndex].hands[match.games[match.currentGameArrayIndex].currentHandArrayIndex].otherTeamTrickPointsText)!
-                            match.games[match.currentGameArrayIndex].team2Score += Int(match.games[match.currentGameArrayIndex].hands[match.games[match.currentGameArrayIndex].currentHandArrayIndex].bidWinnerTeamTrickPointsText)!
+                            match.games[match.currentGameArrayIndex].team1Score += Int(match.games[match.currentGameArrayIndex].hands[match.games[match.currentGameArrayIndex].currentHandArrayIndex].bidWinnerTeamTrickPointsText)!
                         }
-                           
+                        // Check if Other Team Trick Points are zero and, if so, subtract the meld points from the score of that team
+                        if Int(match.games[match.currentGameArrayIndex].hands[match.games[match.currentGameArrayIndex].currentHandArrayIndex].otherTeamTrickPointsText)! == 0  {
+                            if match.games[match.currentGameArrayIndex].hands[match.games[match.currentGameArrayIndex].currentHandArrayIndex].bidWinnerPlayerNumber == 1 || match.games[match.currentGameArrayIndex].hands[match.games[match.currentGameArrayIndex].currentHandArrayIndex].bidWinnerPlayerNumber == 3 || match.games[match.currentGameArrayIndex].hands[match.games[match.currentGameArrayIndex].currentHandArrayIndex].bidWinnerPlayerNumber == 5 {
+                                // Team 1 is bid winner - subtract meld points from Team 2
+                                match.games[match.currentGameArrayIndex].team2Score -= ( Int(match.games[match.currentGameArrayIndex].hands[match.games[match.currentGameArrayIndex].currentHandArrayIndex].player2MeldText)! + Int(match.games[match.currentGameArrayIndex].hands[match.games[match.currentGameArrayIndex].currentHandArrayIndex].player4MeldText)! + Int(match.games[match.currentGameArrayIndex].hands[match.games[match.currentGameArrayIndex].currentHandArrayIndex].player6MeldText)!)
+
+                            } else {
+                                // Team 2 is bid winner - subtract meld points from Team 1
+                                match.games[match.currentGameArrayIndex].team1Score -= ( Int(match.games[match.currentGameArrayIndex].hands[match.games[match.currentGameArrayIndex].currentHandArrayIndex].player1MeldText)! + Int(match.games[match.currentGameArrayIndex].hands[match.games[match.currentGameArrayIndex].currentHandArrayIndex].player3MeldText)! + Int(match.games[match.currentGameArrayIndex].hands[match.games[match.currentGameArrayIndex].currentHandArrayIndex].player5MeldText)!)
+                            }
+                        }
                         
                     } else if match.selectedNumberOfPlayers == 5 {
                         // 5 Players Game
@@ -810,6 +830,8 @@ class PinochleManager: ObservableObject {
                         calculateBidWinnerTeamMeld()
                         
                         var losingPlayersNumbersArray = [1, 2, 3, 4, 5]
+                        // This variable will be used to determne if to subtract meld points from player scores of Other Team if they have zero trick points
+                        var isZeroTrickPoints = false
                         
                         // Add trick points to the Bid Winner's score
                         switch match.games[match.currentGameArrayIndex].hands[match.games[match.currentGameArrayIndex].currentHandArrayIndex].bidWinnerPlayerNumber {
@@ -884,18 +906,38 @@ class PinochleManager: ObservableObject {
                         }
                         // Add trick points to the losers scores (The other 3 players who are not the Bid Winner or the Partner)
                         // The losingPlayersNumbers array should now only contain the other 3 players
+                        
+                        if Int(match.games[match.currentGameArrayIndex].hands[match.games[match.currentGameArrayIndex].currentHandArrayIndex].otherTeamTrickPointsText)! == 0  {
+                            isZeroTrickPoints = true
+                        }
                         let firstBidLoserPlayerNumber = losingPlayersNumbersArray[0]
                         switch firstBidLoserPlayerNumber {
                         case 1:
                             match.games[match.currentGameArrayIndex].player1Score += Int(match.games[match.currentGameArrayIndex].hands[match.games[match.currentGameArrayIndex].currentHandArrayIndex].otherTeamTrickPointsText)!
+                            // Check if Other Team Trick Points are zero and, if so, subtract meld points from the score of those players
+                            if isZeroTrickPoints {
+                                match.games[match.currentGameArrayIndex].player1Score -= Int(match.games[match.currentGameArrayIndex].hands[match.games[match.currentGameArrayIndex].currentHandArrayIndex].player1MeldText)!
+                            }
                         case 2:
                             match.games[match.currentGameArrayIndex].player2Score += Int(match.games[match.currentGameArrayIndex].hands[match.games[match.currentGameArrayIndex].currentHandArrayIndex].otherTeamTrickPointsText)!
+                            if isZeroTrickPoints {
+                                match.games[match.currentGameArrayIndex].player2Score -= Int(match.games[match.currentGameArrayIndex].hands[match.games[match.currentGameArrayIndex].currentHandArrayIndex].player2MeldText)!
+                            }
                         case 3:
                             match.games[match.currentGameArrayIndex].player3Score += Int(match.games[match.currentGameArrayIndex].hands[match.games[match.currentGameArrayIndex].currentHandArrayIndex].otherTeamTrickPointsText)!
+                            if isZeroTrickPoints {
+                                match.games[match.currentGameArrayIndex].player3Score -= Int(match.games[match.currentGameArrayIndex].hands[match.games[match.currentGameArrayIndex].currentHandArrayIndex].player3MeldText)!
+                            }
                         case 4:
                             match.games[match.currentGameArrayIndex].player4Score += Int(match.games[match.currentGameArrayIndex].hands[match.games[match.currentGameArrayIndex].currentHandArrayIndex].otherTeamTrickPointsText)!
+                            if isZeroTrickPoints {
+                                match.games[match.currentGameArrayIndex].player4Score -= Int(match.games[match.currentGameArrayIndex].hands[match.games[match.currentGameArrayIndex].currentHandArrayIndex].player4MeldText)!
+                            }
                         case 5:
                             match.games[match.currentGameArrayIndex].player5Score += Int(match.games[match.currentGameArrayIndex].hands[match.games[match.currentGameArrayIndex].currentHandArrayIndex].otherTeamTrickPointsText)!
+                            if isZeroTrickPoints {
+                                match.games[match.currentGameArrayIndex].player5Score -= Int(match.games[match.currentGameArrayIndex].hands[match.games[match.currentGameArrayIndex].currentHandArrayIndex].player5MeldText)!
+                            }
                         default:
                             print("ERROR assigning trick points in updateScoreWithTrickPoints() of HandPlayManager")
                         }
@@ -904,14 +946,29 @@ class PinochleManager: ObservableObject {
                         switch secondBidLoserPlayerNumber {
                         case 1:
                             match.games[match.currentGameArrayIndex].player1Score += Int(match.games[match.currentGameArrayIndex].hands[match.games[match.currentGameArrayIndex].currentHandArrayIndex].otherTeamTrickPointsText)!
+                            if isZeroTrickPoints {
+                                match.games[match.currentGameArrayIndex].player1Score -= Int(match.games[match.currentGameArrayIndex].hands[match.games[match.currentGameArrayIndex].currentHandArrayIndex].player1MeldText)!
+                            }
                         case 2:
                             match.games[match.currentGameArrayIndex].player2Score += Int(match.games[match.currentGameArrayIndex].hands[match.games[match.currentGameArrayIndex].currentHandArrayIndex].otherTeamTrickPointsText)!
+                            if isZeroTrickPoints {
+                                match.games[match.currentGameArrayIndex].player2Score -= Int(match.games[match.currentGameArrayIndex].hands[match.games[match.currentGameArrayIndex].currentHandArrayIndex].player2MeldText)!
+                            }
                         case 3:
                             match.games[match.currentGameArrayIndex].player3Score += Int(match.games[match.currentGameArrayIndex].hands[match.games[match.currentGameArrayIndex].currentHandArrayIndex].otherTeamTrickPointsText)!
+                            if isZeroTrickPoints {
+                                match.games[match.currentGameArrayIndex].player3Score -= Int(match.games[match.currentGameArrayIndex].hands[match.games[match.currentGameArrayIndex].currentHandArrayIndex].player3MeldText)!
+                            }
                         case 4:
                             match.games[match.currentGameArrayIndex].player4Score += Int(match.games[match.currentGameArrayIndex].hands[match.games[match.currentGameArrayIndex].currentHandArrayIndex].otherTeamTrickPointsText)!
+                            if isZeroTrickPoints {
+                                match.games[match.currentGameArrayIndex].player4Score -= Int(match.games[match.currentGameArrayIndex].hands[match.games[match.currentGameArrayIndex].currentHandArrayIndex].player4MeldText)!
+                            }
                         case 5:
                             match.games[match.currentGameArrayIndex].player5Score += Int(match.games[match.currentGameArrayIndex].hands[match.games[match.currentGameArrayIndex].currentHandArrayIndex].otherTeamTrickPointsText)!
+                            if isZeroTrickPoints {
+                                match.games[match.currentGameArrayIndex].player5Score -= Int(match.games[match.currentGameArrayIndex].hands[match.games[match.currentGameArrayIndex].currentHandArrayIndex].player5MeldText)!
+                            }
                         default:
                             print("ERROR assigning trick points in updateScoreWithTrickPoints() of HandPlayManager")
                         }
@@ -920,14 +977,29 @@ class PinochleManager: ObservableObject {
                         switch thirdBidLoserPlayerNumber {
                         case 1:
                             match.games[match.currentGameArrayIndex].player1Score += Int(match.games[match.currentGameArrayIndex].hands[match.games[match.currentGameArrayIndex].currentHandArrayIndex].otherTeamTrickPointsText)!
+                            if isZeroTrickPoints {
+                                match.games[match.currentGameArrayIndex].player1Score -= Int(match.games[match.currentGameArrayIndex].hands[match.games[match.currentGameArrayIndex].currentHandArrayIndex].player1MeldText)!
+                            }
                         case 2:
                             match.games[match.currentGameArrayIndex].player2Score += Int(match.games[match.currentGameArrayIndex].hands[match.games[match.currentGameArrayIndex].currentHandArrayIndex].otherTeamTrickPointsText)!
+                            if isZeroTrickPoints {
+                                match.games[match.currentGameArrayIndex].player2Score -= Int(match.games[match.currentGameArrayIndex].hands[match.games[match.currentGameArrayIndex].currentHandArrayIndex].player2MeldText)!
+                            }
                         case 3:
                             match.games[match.currentGameArrayIndex].player3Score += Int(match.games[match.currentGameArrayIndex].hands[match.games[match.currentGameArrayIndex].currentHandArrayIndex].otherTeamTrickPointsText)!
+                            if isZeroTrickPoints {
+                                match.games[match.currentGameArrayIndex].player3Score -= Int(match.games[match.currentGameArrayIndex].hands[match.games[match.currentGameArrayIndex].currentHandArrayIndex].player3MeldText)!
+                            }
                         case 4:
                             match.games[match.currentGameArrayIndex].player4Score += Int(match.games[match.currentGameArrayIndex].hands[match.games[match.currentGameArrayIndex].currentHandArrayIndex].otherTeamTrickPointsText)!
+                            if isZeroTrickPoints {
+                                match.games[match.currentGameArrayIndex].player4Score -= Int(match.games[match.currentGameArrayIndex].hands[match.games[match.currentGameArrayIndex].currentHandArrayIndex].player4MeldText)!
+                            }
                         case 5:
                             match.games[match.currentGameArrayIndex].player5Score += Int(match.games[match.currentGameArrayIndex].hands[match.games[match.currentGameArrayIndex].currentHandArrayIndex].otherTeamTrickPointsText)!
+                            if isZeroTrickPoints {
+                                match.games[match.currentGameArrayIndex].player5Score -= Int(match.games[match.currentGameArrayIndex].hands[match.games[match.currentGameArrayIndex].currentHandArrayIndex].player5MeldText)!
+                            }
                         default:
                             print("ERROR assigning trick points in updateScoreWithTrickPoints() of HandPlayManager")
                         }

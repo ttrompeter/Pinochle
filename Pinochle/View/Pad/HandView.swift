@@ -60,6 +60,12 @@ struct HandView: View {
     @State var isKeyPadVisiblePlayer4TrickPoints = false
     @State var isKeyPadVisiblePlayer5TrickPoints = false
   
+    // Testing Numbers Only
+    @State var winningBidAmountString1 = ""
+    @State var winningBidAmountString2 = ""
+    @State var winningBidAmountString3 = ""
+    @State var winningBidAmountString4 = ""
+    
     var body: some View {
         
         VStack {
@@ -266,7 +272,7 @@ struct HandView: View {
 
                                     TextEntryField(placeholder: "Bid", prompt: "Number", field: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].winningBidText)
                                         .disabled(manager.match.isDisabledWinningBidTextField)
-                                        
+                                    
 //                                    Text("\(manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].winningBidText)")
 //                                        .frame(width:60, height: 30)
 //                                        .foregroundColor(Color(.racinggreen))
@@ -363,6 +369,26 @@ struct HandView: View {
                                     }
                                 }
                                 Spacer()
+                            }
+                            
+                            HStack {
+                                // Testing Only
+                                TextField("Bid1", text: $winningBidAmountString1)
+                                    .frame(width: 60, height: 40)
+                                    .keyboardType(.numberPad)
+                                    .numbersOnly($winningBidAmountString1)
+                                
+                                TextField("Bid2", text: $manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].winningBidText)
+                                    .frame(width: 60, height: 40)
+                                    .keyboardType(.numberPad)
+                                    .numbersOnly($manager.match.games[manager.match.currentGameArrayIndex].hands[manager.match.games[manager.match.currentGameArrayIndex].currentHandArrayIndex].winningBidText)
+                                
+                                TextField("Bid3", text: $winningBidAmountString2)
+                                    .frame(width: 60, height: 40)
+                                    .keyboardType(.numberPad)
+                                    .numbersOnly($winningBidAmountString2)
+                                
+                                TextEntryField(placeholder: "Bid4", prompt: "Number", field: $winningBidAmountString3)
                             }
                         }
                         

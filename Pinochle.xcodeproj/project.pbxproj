@@ -58,6 +58,7 @@
 		E371D527294D7B0E00BA307C /* CustomKeyPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371D526294D7B0E00BA307C /* CustomKeyPad.swift */; };
 		E371D529294E8E9600BA307C /* BlurredFullCover.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371D528294E8E9600BA307C /* BlurredFullCover.swift */; };
 		E371D52B294EBBBB00BA307C /* NumberOnlyViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E371D52A294EBBBB00BA307C /* NumberOnlyViewModifier.swift */; };
+		E394F4322953C1B7003F0C96 /* WorkingFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E394F4312953C1B7003F0C96 /* WorkingFile.swift */; };
 		E3D9AE30294CC6E10025F4A5 /* PinochleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D9AE2F294CC6E10025F4A5 /* PinochleApp.swift */; };
 		E3D9AE34294CC6E20025F4A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3D9AE33294CC6E20025F4A5 /* Assets.xcassets */; };
 		E3D9AE37294CC6E20025F4A5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3D9AE36294CC6E20025F4A5 /* Preview Assets.xcassets */; };
@@ -113,6 +114,7 @@
 		E371D526294D7B0E00BA307C /* CustomKeyPad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomKeyPad.swift; sourceTree = "<group>"; };
 		E371D528294E8E9600BA307C /* BlurredFullCover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurredFullCover.swift; sourceTree = "<group>"; };
 		E371D52A294EBBBB00BA307C /* NumberOnlyViewModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberOnlyViewModifier.swift; sourceTree = "<group>"; };
+		E394F4312953C1B7003F0C96 /* WorkingFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkingFile.swift; sourceTree = "<group>"; };
 		E3D9AE2C294CC6E10025F4A5 /* Pinochle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pinochle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3D9AE2F294CC6E10025F4A5 /* PinochleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinochleApp.swift; sourceTree = "<group>"; };
 		E3D9AE33294CC6E20025F4A5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 				E371D4D0294CD7EA00BA307C /* TypeExtension.swift */,
 				E371D4D3294CD7EA00BA307C /* UsingPopover.swift */,
 				E371D4D5294CD7EA00BA307C /* Validator.swift */,
+				E394F4312953C1B7003F0C96 /* WorkingFile.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -381,6 +384,7 @@
 				E371D50D294CD8EC00BA307C /* ScratchPadSheet.swift in Sources */,
 				E371D519294CD8EC00BA307C /* InvalidTrickPointsPopover.swift in Sources */,
 				E371D4DB294CD7EA00BA307C /* Validator.swift in Sources */,
+				E394F4322953C1B7003F0C96 /* WorkingFile.swift in Sources */,
 				E371D4CC294CD7AA00BA307C /* Settings.swift in Sources */,
 				E3D9AE30294CC6E10025F4A5 /* PinochleApp.swift in Sources */,
 				E371D507294CD8EC00BA307C /* GameOverPopover.swift in Sources */,

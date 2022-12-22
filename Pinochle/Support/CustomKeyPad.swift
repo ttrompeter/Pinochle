@@ -17,9 +17,9 @@ struct CustomKeyPad: View {
     
     var body: some View {
         
+
         ZStack {
-            Rectangle()
-                .foregroundColor(Color(.clouds))
+            Rectangle()                .foregroundColor(Color(.clouds))
                 .frame(width: 270.0, height: 250.0)
                 .cornerRadius(10)
                 .shadow(radius: 5)
